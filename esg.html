@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESG - FOR A BETTER SOCIETY</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brutal: {
+                            yellow: '#FFDF00',
+                            green: '#4ade80',
+                            pink: '#FF90E8',
+                            blue: '#93c5fd',
+                            purple: '#c084fc',
+                            orange: '#fdba74',
+                            white: '#FFFFFF',
+                            black: '#000000',
+                            bg: '#f4f4f0'
+                        }
+                    },
+                    boxShadow: {
+                        'brutal': '8px 8px 0px 0px rgba(0,0,0,1)',
+                        'brutal-sm': '4px 4px 0px 0px rgba(0,0,0,1)',
+                        'brutal-hover': '2px 2px 0px 0px rgba(0,0,0,1)',
+                        'brutal-white': '8px 8px 0px 0px rgba(255,255,255,1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f4f4f0;
+            color: #000;
+            overflow-x: hidden;
+        }
+
+        /* Brutalist Range Slider */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 12px;
+            cursor: pointer;
+            background: #000;
+            border: 2px solid #000;
+            border-radius: 0px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            height: 32px;
+            width: 32px;
+            border-radius: 0px;
+            background: #FFDF00;
+            border: 4px solid #000;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -12px;
+            box-shadow: 2px 2px 0px #000;
+        }
+        input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 12px;
+            cursor: pointer;
+            background: #000;
+            border: 2px solid #000;
+        }
+        input[type=range]::-moz-range-thumb {
+            height: 32px;
+            width: 32px;
+            border-radius: 0;
+            background: #FFDF00;
+            border: 4px solid #000;
+            cursor: pointer;
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        /* Marquee Animation */
+        .marquee-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 4px solid #000;
+            border-bottom: 4px solid #000;
+            background: #FF90E8;
+            padding: 10px 0;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 15s linear infinite;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Animations */
+        .brutal-card {
+            transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        }
+        .brutal-card:hover {
+            transform: translate(6px, 6px);
+            box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+        }
+
+        /* Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.4s cubic-bezier(0, 0, 0.2, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .checker-bg {
+            background-image: linear-gradient(45deg, #000 25%, transparent 25%), 
+                              linear-gradient(-45deg, #000 25%, transparent 25%), 
+                              linear-gradient(45deg, transparent 75%, #000 75%), 
+                              linear-gradient(-45deg, transparent 75%, #000 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+        
+        .diagonal-stripes {
+            background: repeating-linear-gradient(
+                45deg,
+                #FFDF00,
+                #FFDF00 10px,
+                #000000 10px,
+                #000000 20px
+            );
+        }
+        
+        .dots-bg {
+            background-image: radial-gradient(#000 2px, transparent 2px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-black selection:text-brutal-yellow">
+
+    <!-- Header / Navbar -->
+    <header class="fixed w-full top-0 bg-brutal-bg border-b-4 border-black z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2">
+                    <div class="bg-black text-brutal-yellow px-2 py-1 font-black text-2xl tracking-tighter transform -rotate-2 border-2 border-black">
+                        ESG
+                    </div>
+                    <span class="font-serif font-black text-2xl italic tracking-wide hidden sm:block">for Industrial <br>& Residential Complex</span>
+                </div>
+                <nav class="hidden md:flex space-x-1 lg:space-x-3 font-bold uppercase tracking-wider text-xs lg:text-sm">
+                    <a href="#about" class="border-2 border-transparent hover:border-black hover:bg-brutal-pink px-2 py-1 transition-colors">Xây dựng Xanh</a>
+                    <a href="#calculator" class="border-2 border-transparent hover:border-black hover:bg-brutal-yellow px-2 py-1 transition-colors">Tính điểm</a>
+                    <a href="#case-study" class="border-2 border-transparent hover:border-black hover:bg-brutal-orange px-2 py-1 transition-colors">An Sinh XH</a>
+                    <a href="#budget" class="border-2 border-transparent hover:border-black hover:bg-[#a855f7] hover:text-white px-2 py-1 transition-colors">Ngân sách</a>
+                    <a href="#roi-strategy" class="border-2 border-black bg-white text-black hover:bg-black hover:text-white px-2 py-1 shadow-brutal-hover transform -rotate-2 transition-all">Lợi ích</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 bg-brutal-yellow overflow-hidden border-b-4 border-black">
+        <div class="absolute top-20 -right-10 w-64 h-64 bg-brutal-pink rounded-full border-4 border-black shadow-brutal mix-blend-multiply opacity-80"></div>
+        <div class="absolute bottom-10 -left-10 w-48 h-48 bg-brutal-blue border-4 border-black shadow-brutal mix-blend-multiply opacity-80 transform rotate-12"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <div class="inline-block border-4 border-black bg-white px-4 py-1 font-black uppercase tracking-widest mb-8 shadow-brutal-sm transform -rotate-2">
+                Xanh / Bền vững
+            </div>
+            <h1 class="font-serif text-7xl md:text-9xl font-black mb-6 leading-none tracking-tighter uppercase">
+                Khởi tạo<br>
+                <span class="bg-black text-white px-4 py-2 inline-block transform rotate-1 shadow-brutal-white mt-2">Xã hội xanh</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-bold mb-12 max-w-3xl mx-auto border-l-8 border-black pl-6 text-left">
+                Leadership in Energy and Environmental Design.<br>
+                Gạt bỏ sự sáo rỗng, đưa xây dựng bền vững về cốt lõi thô mộc và hiệu quả nhất.
+            </p>
+            <a href="#case-study" class="brutal-card inline-block px-10 py-5 text-2xl uppercase font-black bg-brutal-green border-4 border-black shadow-brutal text-black">
+                ĐỀ XUẤT ESG THỰC CHIẾN &darr;
+            </a>
+        </div>
+    </section>
+
+    <!-- Ticker Tape -->
+    <div class="marquee-wrapper">
+        <div class="marquee-content">
+            SUSTAINABILITY IS NOT A TREND &bull; LEED V4.1 &bull; ESG STRATEGY &bull; BUILD GREEN OR GO HOME &bull; SUSTAINABILITY IS NOT A TREND &bull; LEED V4.1 &bull; ESG STRATEGY &bull; BUILD GREEN OR GO HOME &bull; SUSTAINABILITY IS NOT A TREND &bull; LEED V4.1 &bull; ESG STRATEGY &bull; BUILD GREEN OR GO HOME &bull;
+        </div>
+    </div>
+
+    <!-- Section 1: LEED là gì? -->
+    <section id="about" class="py-24 relative bg-brutal-bg border-b-4 border-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2 reveal">
+                    <div class="border-8 border-black shadow-brutal relative bg-white">
+                        <div class="absolute -top-6 -left-6 bg-brutal-pink text-black font-black uppercase text-2xl border-4 border-black px-4 py-2 transform -rotate-6 z-10">
+                            LEED LÀ GÌ?
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Kiến trúc xanh" class="object-cover h-[500px] w-full filter contrast-125 saturate-150">
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 reveal">
+                    <h3 class="font-sans text-5xl md:text-6xl font-black mb-8 uppercase tracking-tighter">Tiêu chuẩn <br><span class="font-serif italic text-brutal-green underline decoration-8 decoration-black">Khắt khe nhất</span></h3>
+                    <div class="space-y-6 text-xl font-semibold border-l-4 border-black pl-6">
+                        <p>
+                            <span class="bg-brutal-yellow px-2 py-1 border-2 border-black">LEED</span> là hệ thống đánh giá công trình xanh uy tín và được sử dụng rộng rãi nhất thế giới.
+                        </p>
+                        <p>
+                            Phát triển bởi <strong class="uppercase text-2xl">USGBC</strong>, nó vứt bỏ những thiết kế hào nhoáng, buộc các dự án phải tối ưu tài nguyên, bảo vệ con người và môi trường qua các thước đo khốc liệt nhất.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: 7 Tiêu chí -->
+    <section id="criteria" class="py-24 bg-white border-b-4 border-black relative">
+        <div class="absolute inset-0 checker-bg opacity-5"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="mb-16 reveal">
+                <h2 class="inline-block bg-black text-white px-6 py-2 font-black text-4xl uppercase shadow-brutal transform rotate-1">
+                    7 Tiêu chí <span class="text-brutal-pink">Cốt lõi</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- C1 -->
+                <div class="brutal-card bg-brutal-blue border-4 border-black p-8 shadow-brutal reveal">
+                    <div class="font-black text-6xl mb-4 border-b-4 border-black pb-2">01</div>
+                    <h4 class="font-black text-2xl uppercase mb-3">Vị trí & Giao thông</h4>
+                    <p class="font-semibold text-lg">Giảm rác thải carbon. Xây dựng gần tiện ích, ép buộc sử dụng giao thông thay thế (xe điện, xe đạp, đi bộ).</p>
+                </div>
+                <!-- C2 -->
+                <div class="brutal-card bg-brutal-green border-4 border-black p-8 shadow-brutal reveal">
+                    <div class="font-black text-6xl mb-4 border-b-4 border-black pb-2">02</div>
+                    <h4 class="font-black text-2xl uppercase mb-3">Địa điểm Bền vững</h4>
+                    <p class="font-semibold text-lg">Tôn trọng hệ sinh thái tự nhiên. Quản lý nước mưa tàn bạo, xóa sổ hiệu ứng đảo nhiệt đô thị.</p>
+                </div>
+                <!-- C3 -->
+                <div class="brutal-card bg-brutal-pink border-4 border-black p-8 shadow-brutal reveal">
+                    <div class="font-black text-6xl mb-4 border-b-4 border-black pb-2">03</div>
+                    <h4 class="font-black text-2xl uppercase mb-3">Hiệu quả Nước</h4>
+                    <p class="font-semibold text-lg">Không lãng phí một giọt nào. Thiết kế hệ thống tái chế và cắt giảm tiêu thụ nước triệt để.</p>
+                </div>
+                <!-- C4 -->
+                <div class="brutal-card bg-brutal-yellow border-4 border-black p-8 shadow-brutal reveal">
+                    <div class="font-black text-6xl mb-4 border-b-4 border-black pb-2">04</div>
+                    <h4 class="font-black text-2xl uppercase mb-3">Năng lượng & Không khí</h4>
+                    <p class="font-semibold text-lg"><strong>Trái tim của LEED.</strong> Tối ưu hiệu suất, áp đặt năng lượng tái tạo, triệt tiêu khí nhà kính.</p>
+                </div>
+                <!-- C5 -->
+                <div class="brutal-card bg-brutal-orange border-4 border-black p-8 shadow-brutal reveal">
+                    <div class="font-black text-6xl mb-4 border-b-4 border-black pb-2">05</div>
+                    <h4 class="font-black text-2xl uppercase mb-3">Vật liệu & Tài nguyên</h4>
+                    <p class="font-semibold text-lg">Ngừng khai thác bừa bãi. Sử dụng vật liệu tái chế, thô mộc, tái sử dụng và quản lý rác khắc nghiệt.</p>
+                </div>
+                <!-- C6 -->
+                <div class="brutal-card bg-[#a855f7] border-4 border-black p-8 shadow-brutal reveal">
+                    <div class="font-black text-6xl mb-4 border-b-4 border-black pb-2 text-white">06</div>
+                    <h4 class="font-black text-2xl uppercase mb-3 text-white">Môi trường Trong nhà</h4>
+                    <p class="font-semibold text-lg text-white">Chất lượng không khí và ánh sáng tự nhiên đặt lên hàng đầu. Sức khỏe con người là tối thượng.</p>
+                </div>
+                <!-- C7 -->
+                <div class="brutal-card bg-white border-4 border-black p-8 shadow-brutal reveal md:col-span-2 lg:col-span-3">
+                    <div class="flex flex-col md:flex-row gap-6 items-center">
+                        <div class="font-black text-8xl">07</div>
+                        <div>
+                            <h4 class="font-black text-3xl uppercase mb-3">Đổi mới Thiết kế</h4>
+                            <p class="font-semibold text-xl">Chấp nhận và thưởng điểm cho các giải pháp điên rồ, sáng tạo vượt qua barem an toàn truyền thống.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Cấp độ -->
+    <section id="levels" class="py-24 bg-black text-white border-b-4 border-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 reveal text-center">
+                <h2 class="font-serif text-5xl md:text-7xl font-black uppercase italic mb-4">Phân hạng</h2>
+                <p class="text-2xl font-bold bg-brutal-yellow text-black inline-block px-4 py-1 border-2 border-white transform rotate-2">Thang điểm sinh tồn: 100+</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Certified -->
+                <div class="border-4 border-white p-6 reveal hover:bg-white hover:text-black transition-colors group">
+                    <div class="font-black text-6xl mb-2 group-hover:text-brutal-blue">40+</div>
+                    <h4 class="font-bold text-2xl uppercase">Chứng nhận</h4>
+                    <div class="w-full h-2 bg-white group-hover:bg-black mt-4"></div>
+                </div>
+                <!-- Silver -->
+                <div class="border-4 border-white p-6 reveal hover:bg-white hover:text-black transition-colors group">
+                    <div class="font-black text-6xl mb-2 group-hover:text-brutal-green">50+</div>
+                    <h4 class="font-bold text-2xl uppercase">Bạc</h4>
+                    <div class="w-full h-2 bg-white group-hover:bg-black mt-4"></div>
+                </div>
+                <!-- Gold -->
+                <div class="border-4 border-white p-6 reveal hover:bg-white hover:text-black transition-colors group">
+                    <div class="font-black text-6xl mb-2 group-hover:text-brutal-yellow">60+</div>
+                    <h4 class="font-bold text-2xl uppercase">Vàng</h4>
+                    <div class="w-full h-2 bg-white group-hover:bg-black mt-4"></div>
+                </div>
+                <!-- Platinum -->
+                <div class="border-4 border-white p-6 bg-brutal-purple text-black reveal shadow-brutal-white transform -translate-y-4">
+                    <div class="font-black text-7xl mb-2">80+</div>
+                    <h4 class="font-black text-3xl uppercase">Bạch Kim</h4>
+                    <div class="w-full h-4 bg-black mt-4"></div>
+                    <p class="mt-4 font-bold text-sm uppercase border-t-2 border-black pt-2">Đỉnh cao của kiến trúc xanh</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Quy trình 7 bước -->
+    <section id="process" class="py-24 bg-brutal-bg border-b-4 border-black">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 reveal">
+                <h2 class="bg-black text-white inline-block px-4 py-2 font-black text-5xl uppercase border-4 border-brutal-pink shadow-brutal">
+                    Quy trình 7 Bước
+                </h2>
+            </div>
+
+            <div class="space-y-8">
+                <div class="brutal-card bg-white border-4 border-black flex flex-col md:flex-row shadow-brutal reveal">
+                    <div class="bg-brutal-orange text-black font-black text-5xl w-full md:w-32 flex items-center justify-center p-6 border-b-4 md:border-b-0 md:border-r-4 border-black">1</div>
+                    <div class="p-8">
+                        <h4 class="font-black text-2xl uppercase mb-2">Chọn hệ thống đánh giá</h4>
+                        <p class="font-bold text-lg">BD+C, ID+C, O+M, hoặc ND. Định hình luật chơi ngay từ đầu.</p>
+                    </div>
+                </div>
+                <div class="brutal-card bg-white border-4 border-black flex flex-col md:flex-row shadow-brutal reveal">
+                    <div class="bg-brutal-blue text-black font-black text-5xl w-full md:w-32 flex items-center justify-center p-6 border-b-4 md:border-b-0 md:border-r-4 border-black">2</div>
+                    <div class="p-8">
+                        <h4 class="font-black text-2xl uppercase mb-2">Đăng ký dự án</h4>
+                        <p class="font-bold text-lg">Khai báo trên LEED Online. Mở hồ sơ, nộp phí, bắt đầu cuộc chiến.</p>
+                    </div>
+                </div>
+                <div class="brutal-card bg-white border-4 border-black flex flex-col md:flex-row shadow-brutal reveal">
+                    <div class="bg-brutal-green text-black font-black text-5xl w-full md:w-32 flex items-center justify-center p-6 border-b-4 md:border-b-0 md:border-r-4 border-black">3</div>
+                    <div class="p-8">
+                        <h4 class="font-black text-2xl uppercase mb-2">Thiết lập Đội ngũ</h4>
+                        <p class="font-bold text-lg">Kéo chuyên gia LEED AP vào dự án. Cần bộ não hiểu luật để giật 1 điểm thưởng khởi động.</p>
+                    </div>
+                </div>
+                <div class="brutal-card bg-black text-white border-4 border-black flex flex-col md:flex-row shadow-brutal reveal transform md:scale-105 md:-rotate-1">
+                    <div class="bg-red-500 text-black font-black text-5xl w-full md:w-32 flex items-center justify-center p-6 border-b-4 md:border-b-0 md:border-r-4 border-black">4</div>
+                    <div class="p-8">
+                        <h4 class="font-black text-2xl uppercase mb-2">Điều kiện Tiên quyết</h4>
+                        <p class="font-bold text-lg text-red-200">Không có điểm số. Chỉ có PASS hoặc FAIL. Trượt một lỗi, loại toàn bộ dự án.</p>
+                    </div>
+                </div>
+                <div class="brutal-card bg-white border-4 border-black flex flex-col md:flex-row shadow-brutal reveal">
+                    <div class="bg-brutal-yellow text-black font-black text-5xl w-full md:w-32 flex items-center justify-center p-6 border-b-4 md:border-b-0 md:border-r-4 border-black">5</div>
+                    <div class="p-8">
+                        <h4 class="font-black text-2xl uppercase mb-2">Tích lũy Điểm Tín chỉ</h4>
+                        <p class="font-bold text-lg">Thiết kế, xây dựng, cày cuốc (Credits) để vơ vét từng điểm số một.</p>
+                    </div>
+                </div>
+                <div class="brutal-card bg-white border-4 border-black flex flex-col md:flex-row shadow-brutal reveal">
+                    <div class="bg-brutal-pink text-black font-black text-5xl w-full md:w-32 flex items-center justify-center p-6 border-b-4 md:border-b-0 md:border-r-4 border-black">6</div>
+                    <div class="p-8">
+                        <h4 class="font-black text-2xl uppercase mb-2">Nộp & Đánh giá</h4>
+                        <p class="font-bold text-lg">Đẩy toàn bộ giấy tờ, bản vẽ, thông số lên hệ thống. GBCI sẽ soi mói qua 2 vòng đánh giá khắt khe.</p>
+                    </div>
+                </div>
+                <div class="brutal-card bg-white border-4 border-black flex flex-col md:flex-row shadow-brutal reveal">
+                    <div class="bg-[#a855f7] text-white font-black text-5xl w-full md:w-32 flex items-center justify-center p-6 border-b-4 md:border-b-0 md:border-r-4 border-black">7</div>
+                    <div class="p-8">
+                        <h4 class="font-black text-2xl uppercase mb-2">Nhận chứng nhận</h4>
+                        <p class="font-bold text-lg">Chạm mốc 40+ điểm. Lấy bảng hiệu LEED đính lên tường và thể hiện đẳng cấp xanh.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Calculator -->
+    <section id="calculator" class="py-24 bg-[#FFDF00] border-b-4 border-black relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="inline-block bg-black text-white px-6 py-2 font-black text-3xl md:text-5xl uppercase shadow-brutal transform -rotate-1">
+                    Công cụ Tính điểm
+                </h2>
+                <h3 class="font-bold text-2xl mt-4 uppercase">LEED v4 BD+C Score Calculator</h3>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-12">
+                <!-- Sliders -->
+                <div class="w-full lg:w-2/3 space-y-6">
+                    <div class="bg-white border-4 border-black p-4 shadow-brutal flex flex-col md:flex-row md:items-center gap-4">
+                        <div class="w-full md:w-1/3"><label class="font-black uppercase text-sm block">Vị trí & Giao thông</label><span class="text-xs font-bold text-gray-500">Tối đa: 16</span></div>
+                        <div class="w-full md:w-1/2 flex-grow"><input type="range" min="0" max="16" value="0" class="leed-slider" data-target="score1"></div>
+                        <div class="w-16 text-right"><span id="score1" class="font-black text-3xl bg-brutal-blue px-2 border-2 border-black">0</span></div>
+                    </div>
+                    <div class="bg-white border-4 border-black p-4 shadow-brutal flex flex-col md:flex-row md:items-center gap-4">
+                        <div class="w-full md:w-1/3"><label class="font-black uppercase text-sm block">Địa điểm Bền vững</label><span class="text-xs font-bold text-gray-500">Tối đa: 10</span></div>
+                        <div class="w-full md:w-1/2 flex-grow"><input type="range" min="0" max="10" value="0" class="leed-slider" data-target="score2"></div>
+                        <div class="w-16 text-right"><span id="score2" class="font-black text-3xl bg-brutal-green px-2 border-2 border-black">0</span></div>
+                    </div>
+                    <div class="bg-white border-4 border-black p-4 shadow-brutal flex flex-col md:flex-row md:items-center gap-4">
+                        <div class="w-full md:w-1/3"><label class="font-black uppercase text-sm block">Hiệu quả Nước</label><span class="text-xs font-bold text-gray-500">Tối đa: 11</span></div>
+                        <div class="w-full md:w-1/2 flex-grow"><input type="range" min="0" max="11" value="0" class="leed-slider" data-target="score3"></div>
+                        <div class="w-16 text-right"><span id="score3" class="font-black text-3xl bg-brutal-pink px-2 border-2 border-black">0</span></div>
+                    </div>
+                    <div class="bg-white border-4 border-black p-4 shadow-brutal flex flex-col md:flex-row md:items-center gap-4">
+                        <div class="w-full md:w-1/3"><label class="font-black uppercase text-sm block">Năng lượng & Không khí</label><span class="text-xs font-bold text-gray-500">Tối đa: 33</span></div>
+                        <div class="w-full md:w-1/2 flex-grow"><input type="range" min="0" max="33" value="0" class="leed-slider" data-target="score4"></div>
+                        <div class="w-16 text-right"><span id="score4" class="font-black text-3xl bg-brutal-orange px-2 border-2 border-black">0</span></div>
+                    </div>
+                    <div class="bg-white border-4 border-black p-4 shadow-brutal flex flex-col md:flex-row md:items-center gap-4">
+                        <div class="w-full md:w-1/3"><label class="font-black uppercase text-sm block">Vật liệu & Tài nguyên</label><span class="text-xs font-bold text-gray-500">Tối đa: 13</span></div>
+                        <div class="w-full md:w-1/2 flex-grow"><input type="range" min="0" max="13" value="0" class="leed-slider" data-target="score5"></div>
+                        <div class="w-16 text-right"><span id="score5" class="font-black text-3xl bg-[#a855f7] text-white px-2 border-2 border-black">0</span></div>
+                    </div>
+                    <div class="bg-white border-4 border-black p-4 shadow-brutal flex flex-col md:flex-row md:items-center gap-4">
+                        <div class="w-full md:w-1/3"><label class="font-black uppercase text-sm block">Môi trường Trong nhà</label><span class="text-xs font-bold text-gray-500">Tối đa: 16</span></div>
+                        <div class="w-full md:w-1/2 flex-grow"><input type="range" min="0" max="16" value="0" class="leed-slider" data-target="score6"></div>
+                        <div class="w-16 text-right"><span id="score6" class="font-black text-3xl bg-[#60a5fa] px-2 border-2 border-black">0</span></div>
+                    </div>
+                    <div class="bg-white border-4 border-black p-4 shadow-brutal flex flex-col md:flex-row md:items-center gap-4">
+                        <div class="w-full md:w-1/3"><label class="font-black uppercase text-sm block">Đổi mới & Ưu tiên Khu vực</label><span class="text-xs font-bold text-gray-500">Tối đa: 11</span></div>
+                        <div class="w-full md:w-1/2 flex-grow"><input type="range" min="0" max="11" value="0" class="leed-slider" data-target="score7"></div>
+                        <div class="w-16 text-right"><span id="score7" class="font-black text-3xl bg-white px-2 border-2 border-black">0</span></div>
+                    </div>
+                </div>
+
+                <!-- Result Board -->
+                <div class="w-full lg:w-1/3">
+                    <div class="bg-black text-white border-4 border-black p-8 shadow-brutal-white sticky top-24">
+                        <h4 class="font-black uppercase text-xl mb-4 text-gray-300">Tổng điểm</h4>
+                        <div class="text-center mb-8 border-b-4 border-white pb-6">
+                            <span id="totalScore" class="font-serif text-8xl font-black italic">0</span>
+                            <span class="text-2xl font-bold">/ 110</span>
+                        </div>
+                        
+                        <h4 class="font-black uppercase text-xl mb-2 text-gray-300">Xếp hạng đạt được:</h4>
+                        <div id="tierResult" class="bg-white text-black font-black text-4xl p-4 text-center border-4 border-white transform rotate-2">CHƯA ĐẠT</div>
+                        
+                        <div class="mt-8 relative h-6 bg-gray-800 border-2 border-white w-full">
+                            <div id="progressBar" class="absolute top-0 left-0 h-full bg-red-500 transition-all duration-300" style="width: 0%;"></div>
+                            <div class="absolute top-full left-[36.36%] w-0.5 h-3 bg-white"></div>
+                            <div class="absolute top-full left-[45.45%] w-0.5 h-3 bg-white"></div>
+                            <div class="absolute top-full left-[54.54%] w-0.5 h-3 bg-white"></div>
+                            <div class="absolute top-full left-[72.72%] w-0.5 h-3 bg-white"></div>
+                        </div>
+                        <div class="relative w-full text-[10px] font-bold text-gray-400 mt-3 h-4">
+                            <span class="absolute left-[36.36%] transform -translate-x-1/2">40</span>
+                            <span class="absolute left-[45.45%] transform -translate-x-1/2">50</span>
+                            <span class="absolute left-[54.54%] transform -translate-x-1/2">60</span>
+                            <span class="absolute left-[72.72%] transform -translate-x-1/2">80</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: CASE STUDY ĐIỂN HÌNH -->
+    <section id="case-study" class="py-24 bg-white border-b-4 border-black relative">
+        <div class="absolute top-0 left-0 w-full h-8 diagonal-stripes border-b-4 border-black"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+            <div class="reveal mb-16 relative">
+                <div class="absolute -top-10 -left-6 w-32 h-32 bg-brutal-pink rounded-full border-4 border-black z-0 mix-blend-multiply"></div>
+                <h2 class="relative z-10 inline-block bg-black text-white px-6 py-4 font-black text-4xl md:text-5xl uppercase shadow-brutal transform -rotate-1 border-4 border-white">
+                    Case Study BẢO HIỂM TOÀN DÂN CƯ
+                </h2>
+                <h3 class="font-serif italic text-3xl font-black mt-6 text-brutal-purple border-b-4 border-brutal-purple inline-block">
+                    Bài toán Phúc lợi & Bảo hiểm Công nhân
+                </h3>
+            </div>
+            <div class="reveal border-l-8 border-black pl-6 md:pl-10 mb-20 bg-brutal-bg p-8 border-4 shadow-brutal-sm">
+                <div class="flex items-start gap-4">
+                    <span class="text-6xl">💡</span>
+                    <div>
+                        <p class="text-2xl font-black uppercase mb-4 text-black">Hướng tiếp cận B2B2C chiến lược</p>
+                        <p class="text-lg font-semibold text-gray-800 leading-relaxed">
+                            Lương công nhân 12-15 triệu/tháng (Tổng 24-30 triệu/nhà). Giải pháp không nằm ở việc bán lẻ (B2C), mà là đàm phán với Chủ Khu Công Nghiệp / Nhà Máy (B2B2C). Đây là chìa khóa kết hợp hoàn hảo giữa <strong class="bg-brutal-yellow px-1 border-2 border-black">Bảo hiểm, Y tế và Quản trị nhân sự</strong> quy mô lớn.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PART 1: The Package -->
+            <div class="reveal mb-24">
+                <h3 class="font-black text-3xl uppercase bg-brutal-blue inline-block px-6 py-2 border-4 border-black shadow-brutal mb-6 transform rotate-1">
+                    Phần 1: Gói Bảo Vệ "May Đo" (5-8% Thu nhập)
+                </h3>
+                <div class="mb-10">
+                    <p class="font-bold text-xl bg-white p-4 border-4 border-black shadow-brutal-sm inline-block transform -rotate-1">
+                        Cấu trúc Gói Bảo vệ Đề xuất (Mức phí tham khảo ~20-22 triệu/năm):
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">
+                    <!-- Trụ cột 1 -->
+                    <div class="brutal-card bg-white border-4 border-black p-6 shadow-brutal relative mt-6 md:mt-0">
+                        <div class="absolute -top-6 -right-4 bg-black text-white font-black px-3 py-2 border-2 border-white transform rotate-3 text-sm max-w-[85%] text-right leading-tight shadow-brutal-sm">
+                            Người Chồng (Trụ cột chính - Phí ~9-10 triệu/năm):
+                        </div>
+                        <h4 class="font-black text-3xl uppercase mb-4 text-brutal-purple border-b-4 border-black pb-2 mt-4">Người Chồng</h4>
+                        <ul class="space-y-4 font-semibold text-lg">
+                            <li class="flex gap-3 items-start"><span class="text-xl mt-1">✅</span> <div><strong>Sản phẩm chính (Nhân thọ):</strong> Sinh mạng ~500 triệu.</div></li>
+                            <li class="flex gap-3 items-start"><span class="text-xl mt-1">⚠️</span> <div><strong>Sản phẩm bổ trợ cốt lõi:</strong> Bảo hiểm Tai nạn nâng cao (Mệnh giá 500 triệu) chi trả theo tỷ lệ thương tật. Đây là rủi ro cao nhất đối với công nhân nam.</div></li>
+                        </ul>
+                    </div>
+                    <!-- Trụ cột 2 -->
+                    <div class="brutal-card bg-white border-4 border-black p-6 shadow-brutal relative mt-6 md:mt-0">
+                        <div class="absolute -top-6 -right-4 bg-black text-white font-black px-3 py-2 border-2 border-white transform -rotate-3 text-sm max-w-[85%] text-right leading-tight shadow-brutal-sm">
+                            Người Vợ (Trụ cột phụ - Phí ~7-8 triệu/năm):
+                        </div>
+                        <h4 class="font-black text-3xl uppercase mb-4 text-brutal-pink border-b-4 border-black pb-2 mt-4">Người Vợ</h4>
+                        <ul class="space-y-4 font-semibold text-lg">
+                            <li class="flex gap-3 items-start"><span class="text-xl mt-1">✅</span> <div><strong>Sản phẩm chính (Nhân thọ):</strong> Sinh mạng ~300 triệu.</div></li>
+                            <li class="flex gap-3 items-start"><span class="text-xl mt-1">🩺</span> <div><strong>Sản phẩm bổ trợ cốt lõi:</strong> Quỹ Bệnh lý nghiêm trọng/Bệnh hiểm nghèo (~200 triệu) để bảo vệ rủi ro ung thư phụ khoa hoặc các bệnh lý tiêu hao tài chính lớn.</div></li>
+                        </ul>
+                    </div>
+                    <!-- Phụ thuộc -->
+                    <div class="brutal-card bg-brutal-green border-4 border-black p-6 shadow-brutal relative mt-6 md:mt-0">
+                        <div class="absolute -top-6 -right-4 bg-black text-white font-black px-3 py-2 border-2 border-white transform rotate-6 text-sm max-w-[85%] text-right leading-tight shadow-brutal-sm">
+                            Con nhỏ (Phụ thuộc - Phí ~3-4 triệu/năm):
+                        </div>
+                        <h4 class="font-black text-3xl uppercase mb-4 text-black border-b-4 border-black pb-2 mt-4">Con Nhỏ</h4>
+                        <ul class="space-y-4 font-semibold text-lg">
+                            <li class="flex gap-3 items-start"><span class="text-xl mt-1">🏥</span> <div><strong>Sản phẩm:</strong> Mua kèm thẻ Chăm sóc sức khỏe nội trú (Hạn mức cơ bản ~100-200 triệu/năm) gắn vào hợp đồng của bố hoặc mẹ. Trẻ nhỏ ở khu công nghiệp rất dễ mắc bệnh hô hấp, thẻ y tế này giúp họ thoát khỏi nỗi lo viện phí lặt vặt.</div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PART 2 & 3 Condensed for brevity, keeping original logic -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                <!-- VŨ KHÍ -->
+                <div class="reveal">
+                    <h3 class="font-black text-2xl uppercase bg-brutal-yellow inline-block px-4 py-2 border-4 border-black shadow-brutal mb-8 transform -rotate-1">Vũ Khí Đàm Phán B2B</h3>
+                    <div class="space-y-4">
+                        <div class="bg-white border-4 border-black p-4 shadow-brutal hover:bg-black hover:text-white transition-colors group flex gap-4">
+                            <div class="font-black text-4xl text-brutal-pink">01</div>
+                            <div><h4 class="font-black uppercase mb-1">Tiêu chuẩn ESG</h4><p class="text-sm font-semibold">Gói phúc lợi bảo hiểm là cách rẻ nhất, nhanh nhất để nâng điểm ESG, qua vòng kiểm toán (Apple, Nike...) và hút vốn FDI.</p></div>
+                        </div>
+                        <div class="bg-white border-4 border-black p-4 shadow-brutal hover:bg-black hover:text-white transition-colors group flex gap-4">
+                            <div class="font-black text-4xl text-brutal-blue">02</div>
+                            <div><h4 class="font-black uppercase mb-1">Giữ chân (Retention Cost)</h4><p class="text-sm font-semibold">Thay vì tốn 20-30tr tuyển người mới, chi 2-5tr/năm tạo ra "chiếc còng số vàng". Công nhân trung thành vì sợ mất thẻ y tế gia đình.</p></div>
+                        </div>
+                        <div class="bg-white border-4 border-black p-4 shadow-brutal hover:bg-black hover:text-white transition-colors group flex gap-4">
+                            <div class="font-black text-4xl text-brutal-orange">03</div>
+                            <div><h4 class="font-black uppercase mb-1">Tối ưu Thuế TNDN</h4><p class="text-sm font-semibold">Chi phí mua BHNT/hưu trí (trần 3tr/người/tháng) được khấu trừ thuế. Doanh nghiệp dùng tiền nộp thuế để mua sự trung thành.</p></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ẨN PHÍ -->
+                <div class="reveal">
+                    <h3 class="font-black text-2xl uppercase bg-brutal-pink inline-block px-4 py-2 border-4 border-black shadow-brutal mb-8 transform rotate-1 text-white">Nghệ Thuật "Ẩn Phí"</h3>
+                    <div class="space-y-4">
+                        <div class="bg-white border-4 border-black p-4 shadow-brutal-sm">
+                            <h4 class="font-black uppercase border-b-2 border-brutal-yellow pb-1 mb-2">1. Cấu trúc lại Quỹ Thưởng</h4>
+                            <p class="font-bold text-xs bg-brutal-bg p-2 border border-black">Thay vì tăng lương cứng (tăng phí BHXH) hoặc thưởng Tết bằng tiền mặt, tặng gói "Thưởng Thâm niên & An sinh" trên bảng lương, không trừ thu nhập thực nhận.</p>
+                        </div>
+                        <div class="bg-white border-4 border-black p-4 shadow-brutal-sm">
+                            <h4 class="font-black uppercase border-b-2 border-brutal-green pb-1 mb-2">2. Co-pay & Chuyên cần</h4>
+                            <p class="font-bold text-xs bg-brutal-bg p-2 border border-black">"Làm đủ công: thưởng 500k/tháng. Khoản này + 1 triệu công ty tài trợ = Quỹ bảo hiểm". Dùng tiền "thưởng" để mua, không đụng lương cơ bản.</p>
+                        </div>
+                        <div class="bg-white border-4 border-black p-4 shadow-brutal-sm">
+                            <h4 class="font-black uppercase border-b-2 border-brutal-blue pb-1 mb-2">3. Hệ sinh thái (Cashback)</h4>
+                            <p class="font-bold text-xs bg-brutal-bg p-2 border border-black">Tiền thuê nhà trọ nội khu, siêu thị tích điểm. Cuối năm tự động dùng điểm + quỹ công đoàn gia hạn thẻ y tế. Tiêu dùng sinh ra bảo vệ!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: NGÂN SÁCH -->
+    <section id="budget" class="py-24 bg-brutal-bg border-b-4 border-black relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal mb-8 text-center">
+                <h2 class="inline-block bg-black text-brutal-yellow px-6 py-4 font-black text-4xl md:text-5xl uppercase shadow-brutal transform rotate-1 border-4 border-black">
+                    Bài toán 5.000 Công nhân
+                </h2>
+            </div>
+            
+            <div class="reveal mb-12 max-w-4xl mx-auto">
+                <p class="font-bold text-lg bg-white p-6 border-4 border-black shadow-brutal-sm leading-relaxed transform -rotate-1">
+                    Dựa trên cấu trúc gói bảo vệ toàn diện đã phân tích (Tổng ~21 triệu/năm cho gia đình 3 người; trong đó người lao động chính khoảng 8,5 - 10 triệu/năm), dưới đây là bài toán tính toán tổng phí bảo hiểm theo 3 kịch bản thực tế nhất để bạn mang đi đàm phán với chủ nhà máy:
+                </p>
+            </div>
+
+            <!-- Grid 3 kịch bản -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+                <!-- Kịch bản 1 -->
+                <div class="brutal-card bg-[#a855f7] text-white border-4 border-black p-6 md:p-8 shadow-brutal reveal flex flex-col justify-between">
+                    <div>
+                        <div class="bg-black text-white font-black px-4 py-1 inline-block uppercase text-sm mb-4 border-2 border-white transform -rotate-2">Kịch bản 1</div>
+                        <h3 class="font-black text-2xl uppercase mb-2">Chủ nhà máy đài thọ 100% "Gói Gia Đình"</h3>
+                        <p class="font-bold text-brutal-yellow uppercase tracking-widest text-xs mb-4 border-b-2 border-white/30 pb-2">(Mức độ Phúc lợi Kim Cương)</p>
+                        
+                        <p class="font-semibold text-base mb-6 text-purple-50">Doanh nghiệp trả toàn bộ chi phí bảo hiểm cho bản thân công nhân và cả vợ/chồng, con cái của họ. Đây là chiến lược của các tập đoàn đa quốc gia muốn tạo ra tỷ lệ nghỉ việc (turnover rate) bằng 0%.</p>
+                        
+                        <div class="mb-4 bg-white/10 p-3 border border-white/30">
+                            <span class="block text-xs font-bold uppercase opacity-90">Đơn giá dự kiến:</span>
+                            <span class="font-black text-xl">~21.000.000 VNĐ <span class="text-sm font-bold">/ gia đình / năm</span></span>
+                        </div>
+                        <div class="mb-6 bg-white text-black p-4 border-2 border-black">
+                            <span class="block text-xs font-black uppercase mb-1 text-gray-500">Tổng ngân sách:</span>
+                            <span class="font-bold text-sm block mb-1">5.000 gia đình x 21.000.000 VNĐ =</span>
+                            <div class="font-black text-3xl md:text-4xl text-[#a855f7]">105 tỷ VNĐ<span class="text-base font-bold text-black">/năm</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-auto border-t-4 border-black pt-4">
+                        <span class="font-black uppercase text-sm block mb-2 text-brutal-yellow">Góc nhìn tài chính cho chủ nhà máy:</span>
+                        <p class="font-medium text-sm leading-relaxed opacity-90">105 tỷ/năm chia cho 5.000 người tương đương doanh nghiệp tăng thêm chi phí phúc lợi khoảng 1,75 triệu VNĐ/người/tháng. Nếu mức này nằm trong ngân sách tăng lương/thưởng dự kiến hàng năm, họ hoàn toàn có thể chuyển dịch sang mua bảo hiểm để tối ưu thuế và giữ chân nhân sự tốt hơn việc trả thẳng bằng tiền mặt.</p>
+                    </div>
+                </div>
+
+                <!-- Kịch bản 2 -->
+                <div class="brutal-card bg-brutal-blue text-black border-4 border-black p-6 md:p-8 shadow-brutal reveal flex flex-col justify-between delay-100">
+                    <div>
+                        <div class="bg-black text-white font-black px-4 py-1 inline-block uppercase text-sm mb-4 border-2 border-black transform rotate-2">Kịch bản 2</div>
+                        <h3 class="font-black text-2xl uppercase mb-2">Chủ nhà máy đài thọ 100% "Gói Cá Nhân"</h3>
+                        <p class="font-bold text-gray-800 uppercase tracking-widest text-xs mb-4 border-b-2 border-black/30 pb-2">(Mức độ Phúc lợi Tiêu chuẩn)</p>
+                        
+                        <p class="font-semibold text-base mb-6 text-gray-900">Doanh nghiệp chỉ chi trả gói bảo hiểm toàn diện (Nhân thọ + Tai nạn + Bệnh hiểm nghèo) cho đúng người lao động đang trực tiếp làm việc. Nếu công nhân muốn bảo vệ thêm cho vợ/chồng/con, họ sẽ tự bỏ tiền túi mua thêm (người nhà được mua ké với giá ưu đãi của hợp đồng nhóm).</p>
+                        
+                        <div class="mb-4 bg-white/50 p-3 border border-black/30">
+                            <span class="block text-xs font-bold uppercase opacity-90">Đơn giá dự kiến (Trung bình Nam & Nữ):</span>
+                            <span class="font-black text-xl">~8.500.000 VNĐ <span class="text-sm font-bold">/ công nhân / năm</span></span>
+                        </div>
+                        <div class="mb-6 bg-white text-black p-4 border-2 border-black">
+                            <span class="block text-xs font-black uppercase mb-1 text-gray-500">Tổng ngân sách:</span>
+                            <span class="font-bold text-sm block mb-1">5.000 công nhân x 8.500.000 VNĐ =</span>
+                            <div class="font-black text-3xl md:text-4xl text-brutal-blue" style="-webkit-text-stroke: 1px black;">42.5 tỷ VNĐ<span class="text-base font-bold text-black" style="-webkit-text-stroke: 0px;">/năm</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-auto border-t-4 border-black pt-4">
+                        <span class="font-black uppercase text-sm block mb-2">Góc nhìn tài chính cho chủ nhà máy:</span>
+                        <p class="font-medium text-sm leading-relaxed text-gray-800">Tương đương mức chi trả thêm khoảng 700.000 VNĐ/người/tháng. Đây là con số cực kỳ khả thi đối với các nhà máy quy mô lớn để nâng chuẩn ESG (Môi trường - Xã hội - Quản trị).</p>
+                    </div>
+                </div>
+
+                <!-- Kịch bản 3 -->
+                <div class="brutal-card bg-brutal-green text-black border-4 border-black p-6 md:p-8 shadow-brutal reveal flex flex-col justify-between delay-200">
+                    <div>
+                        <div class="bg-black text-brutal-green font-black px-4 py-1 inline-block uppercase text-sm mb-4 border-2 border-black transform -rotate-1">Kịch bản 3</div>
+                        <h3 class="font-black text-2xl uppercase mb-2">Mô hình Đồng chi trả (Co-pay) qua "Quỹ Phúc lợi & Thưởng"</h3>
+                        
+                        <p class="font-semibold text-base mb-6 mt-4 text-gray-900">Đây là mô hình dễ đàm phán thành công nhất vì giảm tải áp lực tài chính cho nhà máy, sử dụng đúng nghệ thuật "ẩn phí" đã phân tích ở trên. Nhà máy tài trợ một khoản cố định, phần còn lại trích từ quỹ thưởng thâm niên hoặc phụ cấp chuyên cần của công nhân.</p>
+                        
+                        <div class="mb-6 bg-white p-4 border-2 border-black">
+                            <span class="block text-xs font-black uppercase mb-3 border-b-2 border-black pb-2">Cấu trúc ngân sách đề xuất (Cho gói cá nhân 8,5 triệu/năm):</span>
+                            <div class="flex flex-col gap-3 font-bold text-sm">
+                                <div>
+                                    <span class="text-brutal-purple block uppercase font-black">Nhà máy tài trợ (40%):</span> 
+                                    <span class="text-base font-black">3.400.000 VNĐ/năm</span> <br><span class="text-xs font-semibold text-gray-600">(Chỉ tốn ~280.000đ/tháng/người)</span>
+                                </div>
+                                <div class="border-t border-dashed border-gray-400 pt-2">
+                                    <span class="text-blue-700 block uppercase font-black">Công nhân đóng góp từ Thưởng (60%):</span> 
+                                    <span class="text-base font-black">5.100.000 VNĐ/năm</span> <br><span class="text-xs font-semibold text-gray-600">(Trích từ phụ cấp không chạm vào lương cứng)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-auto border-t-4 border-black pt-4">
+                        <span class="font-black uppercase text-sm block mb-1">Tổng ngân sách nhà máy phải chi:</span>
+                        <span class="font-bold text-sm block mb-1">5.000 công nhân x 3.400.000 VNĐ =</span>
+                        <div class="font-black text-3xl md:text-4xl text-brutal-green" style="-webkit-text-stroke: 1px black;">17 tỷ VNĐ<span class="text-base font-bold text-black" style="-webkit-text-stroke: 0px;">/năm</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: TỬ HUYỆT ĐÀM PHÁN B2B (NEW) -->
+    <section id="roi-strategy" class="py-24 bg-black border-b-4 border-black relative dots-bg">
+        <!-- Add a brutalist background pattern layer -->
+        <div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, #FFDF00 0, #FFDF00 2px, transparent 2px, transparent 10px);"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <!-- Header -->
+            <div class="reveal mb-16 text-center">
+                <h2 class="inline-block bg-brutal-pink text-black px-8 py-5 font-black text-5xl md:text-7xl uppercase shadow-[8px_8px_0px_0px_#FFFFFF] transform -rotate-2 border-4 border-black">
+                    LỢI ÍCH <span class="bg-white text-black px-2 border-2 border-black">TO LỚN</span>
+                </h2>
+            </div>
+
+            <!-- Intro -->
+            <div class="reveal mb-24 max-w-4xl mx-auto text-center">
+                <p class="font-serif italic text-2xl md:text-3xl font-black bg-brutal-yellow text-black p-8 border-4 border-black shadow-[8px_8px_0px_0px_#4ade80] inline-block transform rotate-1">
+                    "Góc nhìn biến bảo hiểm thành <span class="bg-black text-white px-3 py-1 border-2 border-white uppercase font-sans not-italic inline-block mt-2 transform -rotate-2 shadow-brutal-white">khoản đầu tư có ROI rõ ràng</span>."
+                </p>
+            </div>
+
+            <!-- PART I: Chủ Nhà Máy -->
+            <div class="mb-32 reveal">
+                <h3 class="font-black text-3xl md:text-5xl uppercase bg-brutal-orange text-black inline-block px-6 py-4 border-4 border-black shadow-[8px_8px_0px_0px_#FFFFFF] mb-12 transform -rotate-1">
+                    I. Đối với Chủ Nhà Máy (Sản xuất)
+                </h3>
+                <p class="font-bold text-xl md:text-2xl mb-12 border-l-8 border-brutal-orange pl-6 text-white py-2">Giải quyết trực tiếp 4 nỗi đau lớn nhất trong vận hành nhà xưởng:</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    
+                    <!-- Point 1 -->
+                    <div class="brutal-card border-4 border-black shadow-[12px_12px_0px_0px_#FFFFFF] bg-brutal-yellow flex flex-col h-full transform -rotate-1 hover:rotate-0 transition-transform">
+                        <div class="p-6 border-b-4 border-black bg-white flex items-center gap-4">
+                            <span class="text-5xl">🔗</span>
+                            <h4 class="font-black text-2xl uppercase leading-tight">1. "Chiếc còng số vàng" <br><span class="text-lg text-gray-500">Giữ chân nhân sự</span></h4>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col gap-6">
+                            <div class="border-4 border-dashed border-black p-4 bg-white/50">
+                                <span class="font-black text-xs bg-black text-white px-2 py-1 uppercase tracking-widest">Thực tế phũ phàng</span>
+                                <p class="mt-3 font-bold text-gray-800 leading-relaxed">Mất một thợ lành nghề tốn 20-30 triệu đồng (hụt sản lượng, chi phí tuyển dụng, thời gian đào tạo mới).</p>
+                            </div>
+                            <div class="border-4 border-black p-5 bg-brutal-pink mt-auto shadow-brutal-sm">
+                                <span class="font-black text-xs bg-black text-white px-2 py-1 uppercase tracking-widest">Lợi ích sâu sắc (ROI)</span>
+                                <p class="mt-3 font-bold text-black leading-relaxed text-lg">Bảo vệ cả gia đình là nắm điểm yếu mềm nhất. Nhảy việc vì lương cao hơn 500k = mất thẻ y tế của con. <strong class="bg-white px-2 border-2 border-black inline-block mt-1">Quyết định nghỉ việc sẽ bị gia đình cản. Tỷ lệ nhảy việc tiệm cận 0%.</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 2 -->
+                    <div class="brutal-card border-4 border-black shadow-[12px_12px_0px_0px_#FFDF00] bg-brutal-blue flex flex-col h-full transform rotate-1 hover:rotate-0 transition-transform">
+                        <div class="p-6 border-b-4 border-black bg-white flex items-center gap-4">
+                            <span class="text-5xl">🌍</span>
+                            <h4 class="font-black text-2xl uppercase leading-tight">2. Tấm vé đón vốn FDI <br><span class="text-lg text-gray-500">Giải bài toán chuẩn ESG</span></h4>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col gap-6">
+                            <div class="border-4 border-dashed border-black p-4 bg-white/50">
+                                <span class="font-black text-xs bg-black text-white px-2 py-1 uppercase tracking-widest">Thực tế phũ phàng</span>
+                                <p class="mt-3 font-bold text-gray-800 leading-relaxed">Chuỗi cung ứng (Apple, Nike...) kiểm toán cực gắt ESG. Chữ "S" (Trách nhiệm xã hội) thường là điểm liệt của nhà xưởng.</p>
+                            </div>
+                            <div class="border-4 border-black p-5 bg-brutal-green mt-auto shadow-brutal-sm">
+                                <span class="font-black text-xs bg-black text-white px-2 py-1 uppercase tracking-widest">Lợi ích sâu sắc (ROI)</span>
+                                <p class="mt-3 font-bold text-black leading-relaxed text-lg">Phúc lợi vươn tới gia đình công nhân là bằng chứng thép. Biến nhà máy thành "môi trường nhân văn", <strong class="bg-white px-2 border-2 border-black inline-block mt-1">lợi thế tuyệt đối khi đấu thầu đơn hàng tỷ USD từ Âu Mỹ.</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 3 -->
+                    <div class="brutal-card border-4 border-black shadow-[12px_12px_0px_0px_#4ade80] bg-brutal-pink flex flex-col h-full transform -rotate-2 hover:rotate-0 transition-transform">
+                        <div class="p-6 border-b-4 border-black bg-white flex items-center gap-4">
+                            <span class="text-5xl">🚫</span>
+                            <h4 class="font-black text-2xl uppercase leading-tight">3. Triệt tiêu Đình công <br><span class="text-lg text-gray-500">& Tín dụng đen</span></h4>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col gap-6">
+                            <div class="border-4 border-dashed border-black p-4 bg-white/50">
+                                <span class="font-black text-xs bg-black text-white px-2 py-1 uppercase tracking-widest">Thực tế phũ phàng</span>
+                                <p class="mt-3 font-bold text-gray-800 leading-relaxed">Đình công thường do áp lực nợ nần. Con ốm -> Vay nặng lãi -> Giang hồ đòi nợ -> Đình trệ sản xuất.</p>
+                            </div>
+                            <div class="border-4 border-black p-5 bg-brutal-yellow mt-auto shadow-brutal-sm">
+                                <span class="font-black text-xs bg-black text-white px-2 py-1 uppercase tracking-widest">Lợi ích sâu sắc (ROI)</span>
+                                <p class="mt-3 font-bold text-black leading-relaxed text-lg">Cắt đứt hoàn toàn vòng lặp ác tính. Công nhân an tâm tài chính sẽ toàn tâm toàn ý, <strong class="bg-white px-2 border-2 border-black inline-block mt-1">hạn chế tối đa sai sót sản phẩm và tai nạn lao động.</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 4 -->
+                    <div class="brutal-card border-4 border-black shadow-[12px_12px_0px_0px_#FF90E8] bg-brutal-green flex flex-col h-full transform rotate-2 hover:rotate-0 transition-transform">
+                        <div class="p-6 border-b-4 border-black bg-white flex items-center gap-4">
+                            <span class="text-5xl">💰</span>
+                            <h4 class="font-black text-2xl uppercase leading-tight">4. Hóa phép Dòng tiền <br><span class="text-lg text-gray-500">Thành tài sản công ty</span></h4>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col gap-6">
+                            <div class="border-4 border-dashed border-black p-4 bg-white/50">
+                                <span class="font-black text-xs bg-black text-white px-2 py-1 uppercase tracking-widest">Thực tế phũ phàng</span>
+                                <p class="mt-3 font-bold text-gray-800 leading-relaxed">Tiền nộp Thuế Thu nhập Doanh nghiệp (TNDN) là dòng tiền "một đi không trở lại".</p>
+                            </div>
+                            <div class="border-4 border-black p-5 bg-brutal-blue mt-auto shadow-brutal-sm">
+                                <span class="font-black text-xs bg-black text-white px-2 py-1 uppercase tracking-widest">Lợi ích sâu sắc (ROI)</span>
+                                <p class="mt-3 font-bold text-black leading-relaxed text-lg">Tiền mua bảo hiểm NLĐ được tính chi phí hợp lệ để khấu trừ thuế. <strong class="bg-white px-2 border-2 border-black inline-block mt-1">Giới chủ đang dùng phần tiền phải nộp thuế để "mua" sự trung thành.</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PART II: Chủ Đầu Tư KCN -->
+            <div class="reveal">
+                <h3 class="font-black text-3xl md:text-5xl uppercase bg-[#a855f7] text-white inline-block px-6 py-4 border-4 border-white shadow-[8px_8px_0px_0px_#FFDF00] mb-12 transform rotate-1">
+                    II. Đối với Chủ Đầu Tư KCN (Hệ sinh thái)
+                </h3>
+                <p class="font-bold text-xl md:text-2xl mb-12 border-l-8 border-[#a855f7] pl-6 text-white py-2">Giá trị vĩ mô cho người kiến tạo đại dự án 500ha:</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- IP Point 1 -->
+                    <div class="brutal-card border-4 border-black shadow-[10px_10px_0px_0px_#4ade80] bg-white p-8 flex flex-col transform -rotate-1">
+                        <div class="text-6xl mb-6">🏙️</div>
+                        <h4 class="font-black text-2xl uppercase mb-4 border-b-8 border-brutal-purple pb-4">1. Bán "Hệ sinh thái", không bán Đất</h4>
+                        <p class="text-sm font-bold text-gray-600 mb-6 bg-gray-100 p-3 border-2 border-black border-dashed">KCN cạnh tranh khô máu bằng giá thuê.</p>
+                        <p class="font-bold text-black mt-auto text-lg leading-relaxed">Tích hợp bảo hiểm biến dự án thành "KCN Sinh thái thế hệ mới". Khách mua giải pháp nhân sự trọn gói, CĐT <strong class="bg-brutal-yellow px-1 border-2 border-black">giữ giá thuê cao hơn đối thủ</strong> mà khách vẫn xếp hàng.</p>
+                    </div>
+
+                    <!-- IP Point 2 -->
+                    <div class="brutal-card border-4 border-black shadow-[10px_10px_0px_0px_#FF90E8] bg-white p-8 flex flex-col transform rotate-1">
+                        <div class="text-6xl mb-6">🔄</div>
+                        <h4 class="font-black text-2xl uppercase mb-4 border-b-8 border-brutal-blue pb-4">2. Kích hoạt Mạng lưới Tiêu dùng nội khu</h4>
+                        <p class="text-sm font-bold text-gray-600 mb-6 bg-gray-100 p-3 border-2 border-black border-dashed">Lương gửi về quê là dòng tiền chảy khỏi 500ha.</p>
+                        <p class="font-bold text-black mt-auto text-lg leading-relaxed">Tài chính an toàn giảm tâm lý phòng thủ. Họ tự tin mua nhà, sắm siêu thị nội khu. Bảo hiểm là <strong class="bg-brutal-blue px-1 border-2 border-black">chất xúc tác tăng vọt doanh thu bán lẻ</strong> cho CĐT.</p>
+                    </div>
+
+                    <!-- IP Point 3 -->
+                    <div class="brutal-card border-4 border-black shadow-[10px_10px_0px_0px_#93c5fd] bg-black text-white p-8 flex flex-col transform -rotate-2">
+                        <div class="text-6xl mb-6">📈</div>
+                        <h4 class="font-black text-2xl uppercase mb-4 border-b-8 border-brutal-green pb-4">3. Tăng trưởng BĐS Bền vững phi mã</h4>
+                        <p class="text-sm font-bold text-gray-400 mb-6 bg-gray-800 p-3 border-2 border-gray-500 border-dashed">Giá trị BĐS phụ thuộc mức độ sầm uất và dòng tiền.</p>
+                        <p class="font-bold text-white mt-auto text-lg leading-relaxed">Cộng đồng 50k người ổn định đẩy giá shophouse, biệt thự. Sự thịnh vượng của "đáy tháp" (công nhân) là <strong class="bg-brutal-green text-black px-1 border-2 border-white">móng nền vững chắc xây giá trị đỉnh tháp.</strong></p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-16 border-t-8 border-brutal-pink">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-black text-4xl uppercase mb-6 transform -rotate-2 inline-block bg-white text-black px-4 py-2 border-4 border-brutal-green">
+                daotuankhai@gmail.com <br> +84901740904
+            </h2>
+            <p class="font-bold text-xl mb-8 uppercase tracking-widest text-brutal-yellow">Xây dựng Xanh. An sinh Xã hội. Phát triển Bền vững</p>
+            <div class="w-full h-1 bg-white mb-8"></div>
+            <p class="font-bold text-sm text-gray-400">© 2026 daotuankhai@gmail.com.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // --- SCROLL REVEAL UI ANIMATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+
+        // --- LEED CALCULATOR LOGIC ---
+        const sliders = document.querySelectorAll('.leed-slider');
+        const totalScoreDisplay = document.getElementById('totalScore');
+        const tierResultDisplay = document.getElementById('tierResult');
+        const progressBar = document.getElementById('progressBar');
+
+        function updateCalculator() {
+            let total = 0;
+            
+            sliders.forEach(slider => {
+                const val = parseInt(slider.value) || 0;
+                total += val;
+                const targetId = slider.getAttribute('data-target');
+                document.getElementById(targetId).textContent = val;
+            });
+
+            totalScoreDisplay.textContent = total;
+
+            const percentage = Math.min((total / 110) * 100, 100);
+            progressBar.style.width = percentage + '%';
+
+            if (total < 40) {
+                tierResultDisplay.textContent = "CHƯA ĐẠT";
+                tierResultDisplay.className = "bg-white text-black font-black text-4xl p-4 text-center border-4 border-white transform rotate-2";
+                progressBar.className = "absolute top-0 left-0 h-full transition-all duration-300 bg-red-500 border-r-2 border-black";
+            } else if (total >= 40 && total <= 49) {
+                tierResultDisplay.textContent = "CHỨNG NHẬN";
+                tierResultDisplay.className = "bg-white text-black font-black text-4xl p-4 text-center border-4 border-brutal-blue transform -rotate-1";
+                progressBar.className = "absolute top-0 left-0 h-full transition-all duration-300 bg-white border-r-2 border-black";
+            } else if (total >= 50 && total <= 59) {
+                tierResultDisplay.textContent = "BẠC (SILVER)";
+                tierResultDisplay.className = "bg-gray-300 text-black font-black text-4xl p-4 text-center border-4 border-white transform rotate-1";
+                progressBar.className = "absolute top-0 left-0 h-full transition-all duration-300 bg-gray-300 border-r-2 border-black";
+            } else if (total >= 60 && total <= 79) {
+                tierResultDisplay.textContent = "VÀNG (GOLD)";
+                tierResultDisplay.className = "bg-brutal-yellow text-black font-black text-4xl p-4 text-center border-4 border-white transform -rotate-2 shadow-brutal";
+                progressBar.className = "absolute top-0 left-0 h-full transition-all duration-300 bg-brutal-yellow border-r-2 border-black";
+            } else if (total >= 80) {
+                tierResultDisplay.textContent = "BẠCH KIM";
+                tierResultDisplay.className = "bg-brutal-purple text-black font-black text-4xl p-4 text-center border-4 border-white transform rotate-2 shadow-brutal-white";
+                progressBar.className = "absolute top-0 left-0 h-full transition-all duration-300 bg-brutal-purple border-r-2 border-black";
+            }
+        }
+
+        sliders.forEach(slider => {
+            slider.addEventListener('input', updateCalculator);
+        });
+
+        updateCalculator();
+    </script>
+</body>
+</html>
